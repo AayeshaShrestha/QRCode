@@ -6,7 +6,7 @@ import QRCode from 'react-native-qrcode'
 export default class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {text: ''};
+    this.state = {text: '', codeToGenerate: ''};
   }
 
   render() {
@@ -17,19 +17,15 @@ export default class App extends React.Component {
           onChangeText={(newText) => this.setState({text: newText})}
         />
 
-        <View style={styles.button}>
-
-          <Button
+        <Button
             onPress={() => {
-              var displayText = this.state.text;
-              Alert.alert(displayText);
+              this.setState({codeToGenerate: this.state.text});
             }}
             title="Generate!!"
-          />
-        </View>
+        />
 
         <QRCode
-          value={this.state.text}
+          value={this.state.codeToGenerate}
           size={250}
           bgColor='#000'
           fgColor='#fff'
@@ -46,11 +42,5 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     marginTop: 125,
-  },
-  button: {
-    justifyContent: 'space-around',
-    flexDirection: 'row',
-    width: '40%',
-    height: 40
   }
 });
